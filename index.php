@@ -7,12 +7,15 @@ require 'user_notes/PostLoader.php';
 
 
 
-// session_start();
-// if(isset($_POST["name"])) {
-//     $Post = new post();
-//     $_SESSION["Post"] = $post;
 
-// }
+
+
+
+ 
+     $post = new PostLoader();
+     $post->addandcreatjson();
+
+ 
 
 
 ?>
@@ -44,9 +47,16 @@ require 'user_notes/PostLoader.php';
     <label for="lname">Last name:</label>
     <input type="text" id="lname" name="lname"><br><br>
     <textarea id="textarea" name="usertext" rows="4" cols="50">Comments please</textarea><br><br>
-    <button type="submit" name="name" >Send</button>
+    <button type="submit" name="submit" >Send</button>
         
      </form>
+
+    
+
+    
+    
+
+    
 
 
 
