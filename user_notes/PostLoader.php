@@ -1,37 +1,20 @@
-<?php 
+<?php
 
-class Blackjack{
+class PostLoader extends Post
+{
+    
 
-    private $player;
-    private $dealer;
-    private $deck;
+    public function stand($deck){
+        $score = parent::getScore();
+        if($score<15){
+            do{
+                parent::hit($deck);
+                $score = parent::getScore();
+            }while($score<15);
+            
+        }
 
-    public function __construct()
-    {
-        $this -> deck  = new deck();
-        $this -> deck -> shuffle();
-        $this -> player = new player($this->deck);
-        $this -> dealer = new dealer($this->deck);
     }
-
-
-    public function getPlayer(){
-        return $this->player;
-    }
-
-
-    public function getDealer(){
-        return $this->dealer;
-    }
-
-
-    public function getDeck(){
-        return $this->deck;
-    }
-
-
-
-
 }
 
 ?>
