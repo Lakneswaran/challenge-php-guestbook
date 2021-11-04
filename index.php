@@ -5,16 +5,10 @@ declare(strict_types=1);
 require 'user_notes/Post.php';
 require 'user_notes/PostLoader.php';
 
-
-
-
-
-
-
- 
      $post = new PostLoader();
      $post->addandcreatjson();
 
+     
  
 
 
