@@ -1,43 +1,70 @@
-<?php 
+<?php
 
-class Post{
+class Post
+{
 
-    private $firstname;
-    private $lastname;
-    private $usertext;
-    private $creatfile;
+    private $feedback = "feedback.json";
+    private $title;
+    private $date;
+    private $content;
+    private $author;
+    private $userarray = [];
+
+    public function __construct()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->author = $_POST[htmlspecialchars("fname")];
+            $this->title = $_POST[htmlspecialchars("lname")];
+            $this->content = $_POST[htmlspecialchars("userText")];
+        }
+    }
 
     
 
- 
+    public function addAndCreatJson()
+    {
 
-    public function creatfile(){
+        if (isset($_POST["submit"])) {
 
-       
+            $creatFile = fopen($this->feedback, 'a');
+            $this->storeData();
+            
+        }
+    }
+
+
+    public function storeData()
+    {
+
+        $date = $this->date;
+        // $date = date('l \t\h\e jS');
+        $date = date('y-m-d h:i:s');
+        $file = json_decode(file_get_contents("feedback.json"));
+
+        $file[] = array("author" => $this->author, "lname" => $this->title, "userText" => $this->content, "date" => $date);
+        $json = json_encode($file);
         
+        file_put_contents($this->feedback, $json);
+
+
+    }
+
+
+    public function getAuthor()
+    {
+        return  $this->author;
+    }
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    public function getContent()
+    {
+        return  $this->content;
+    }
+    public function getDate()
+    {
+        return  $this->date;
+    }
  
-
-        fopen('feedback.txt','w+');
-    // Get a file into an array.  In this example we'll go through HTTP to get
-    // the HTML source of a URL.
-    $lines = file('http://www.example.com/');
-
-    // Loop through our array, show HTML source as HTML source; and line numbers too.
-    foreach ($lines as $line_num => $line) {
-        echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
-    }
-
-    // Using the optional flags parameter
-    $trimmed = file('somefile.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-        return $this->name;
-    }
-
-
-
-
-
-
-
 }
-
